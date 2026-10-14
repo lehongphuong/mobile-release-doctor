@@ -1,4 +1,4 @@
-import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { afterAll } from "vitest";
@@ -16,12 +16,26 @@ afterAll(() => {
   for (const t of temps) rmSync(t, { recursive: true, force: true });
 });
 
+/**
+ * Recursive copy without fs.cpSync: on Windows + Node 22 CI, cpSync did not
+ * produce the non-ASCII destination path that the Unicode path test needs.
+ */
+function copyTree(src: string, dest: string): void {
+  mkdirSync(dest, { recursive: true });
+  for (const entry of readdirSync(src, { withFileTypes: true })) {
+    const from = join(src, entry.name);
+    const to = join(dest, entry.name);
+    if (entry.isDirectory()) copyTree(from, to);
+    else if (entry.isFile()) copyFileSync(from, to);
+  }
+}
+
 /** Copy a fixture to a temp dir and apply overrides (string = write, null = delete). */
 export function makeProject(fixture: string, overlay: Record<string, string | null> = {}, dirName = "project"): string {
   const base = mkdtempSync(join(tmpdir(), "mrd-"));
   temps.push(base);
   const root = join(base, dirName);
-  if (fixture) cpSync(join(FIXTURES, fixture), root, { recursive: true });
+  if (fixture) copyTree(join(FIXTURES, fixture), root);
   else mkdirSync(root, { recursive: true });
   for (const [rel, content] of Object.entries(overlay)) {
     const abs = join(root, rel);
