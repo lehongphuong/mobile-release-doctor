@@ -1,0 +1,5 @@
+# Facts the scanner cannot read from source code.
+app:
+  has_account_creation: false
+  privacy_policy_url: https://habitgarden.app/privacy
+fail_on: high

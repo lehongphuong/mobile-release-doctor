@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [20, 22]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Validate rule schema, policy data and implementations
+        run: npm run validate-rules
+      - name: Bundled scanner and generated docs are up to date
+        if: matrix.os == 'ubuntu-latest'
+        run: npm run check-bundle
+      - run: npm test
+      - name: Smoke test the bundle on the sample projects
+        run: |
+          node skills/mobile-release-doctor/scripts/scan.mjs --project fixtures/flutter/clean-project --strict
+          node skills/mobile-release-doctor/scripts/scan.mjs --project fixtures/flutter/risky-project --format markdown --output report.md
+
+  plugin-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: JSON manifests parse
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('.claude-plugin/plugin.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('.claude-plugin/marketplace.json','utf8'))"

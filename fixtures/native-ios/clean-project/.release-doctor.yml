@@ -1,0 +1,3 @@
+app:
+  has_account_creation: false
+  privacy_policy_url: https://quietjournal.com/privacy

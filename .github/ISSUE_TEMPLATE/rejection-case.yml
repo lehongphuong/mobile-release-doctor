@@ -1,0 +1,36 @@
+name: Store rejection case
+description: Share a real App Store / Google Play rejection so we can add or improve a rule.
+labels: [rejection-case, rule-request]
+body:
+  - type: dropdown
+    id: store
+    attributes:
+      label: Store
+      options: [Apple App Store, Google Play]
+    validations:
+      required: true
+  - type: input
+    id: guideline
+    attributes:
+      label: Guideline / policy cited
+      placeholder: "Guideline 5.1.1(v) - Account Deletion"
+  - type: textarea
+    id: message
+    attributes:
+      label: Rejection message
+      description: Paste the reviewer's text. Remove app names, emails and anything identifying if you prefer.
+    validations:
+      required: true
+  - type: textarea
+    id: cause
+    attributes:
+      label: What was the actual cause and fix?
+  - type: textarea
+    id: detectable
+    attributes:
+      label: Could a scan have detected it? Which files/config show it?
+  - type: input
+    id: date
+    attributes:
+      label: Date of rejection
+      placeholder: 2026-10

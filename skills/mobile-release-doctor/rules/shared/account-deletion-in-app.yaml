@@ -1,0 +1,32 @@
+id: shared.account-deletion-in-app
+version: 0.1.0
+title: Apps with account creation offer in-app account deletion
+description: >
+  Looks for account-creation signals (auth SDKs, sign-up calls, sign-up
+  labels or a developer declaration) and for an account deletion flow.
+  Never passes on keywords alone; found flows are returned for manual
+  verification.
+platforms: [ios, android]
+frameworks: [flutter, react-native, expo, native-ios, native-android]
+category: account-lifecycle
+severity: high
+max_severity: high
+allowed_statuses: [warn, needs_review]
+requirement_status: verified
+verification:
+  level: source-heuristic
+  last_verified: 2026-10-14
+applies_when:
+  - account_creation_detected_or_declared
+policy_references:
+  - apple.account-deletion
+  - apple.guideline-5-1-1-data-collection
+  - google.account-deletion
+recommendation: >
+  Provide an easy-to-find in-app action that initiates deletion of the
+  account and its associated data, and record its path in
+  .release-doctor.yml.
+limitations:
+  - Keyword search cannot prove the flow is reachable or deletes server-side data.
+  - Accounts created via web views or custom backends may not be detected; declare app.has_account_creation.
+introduced_in: 0.1.0

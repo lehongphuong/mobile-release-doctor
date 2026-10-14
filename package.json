@@ -1,0 +1,31 @@
+{
+  "name": "mobile-release-doctor",
+  "version": "0.1.0",
+  "description": "Local-first scanner that catches mobile release issues before App Store and Google Play review.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs && node scripts/generate-rule-docs.mjs",
+    "check-bundle": "node scripts/build.mjs --check && node scripts/generate-rule-docs.mjs --check",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "scan": "node skills/mobile-release-doctor/scripts/scan.mjs",
+    "validate-rules": "node skills/mobile-release-doctor/scripts/scan.mjs --validate-rules"
+  },
+  "dependencies": {
+    "fast-xml-parser": "4.5.7",
+    "yaml": "2.8.1",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "esbuild": "0.25.12",
+    "typescript": "5.9.3",
+    "vitest": "3.2.7"
+  }
+}

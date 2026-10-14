@@ -1,0 +1,1220 @@
+{
+  "schema_version": "1.0",
+  "tool": {
+    "name": "mobile-release-doctor",
+    "version": "0.1.0"
+  },
+  "scanned_at": "2026-10-14T00:00:00.000Z",
+  "evaluation_date": "2026-10-14",
+  "project": {
+    "name": "health_tracker",
+    "framework": "flutter",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "detection_signals": [
+      "pubspec.yaml depends on the Flutter SDK"
+    ],
+    "config_file": ".release-doctor.yml",
+    "files_scanned": 13
+  },
+  "options": {
+    "platform": "all",
+    "fail_on": "high",
+    "offline": true,
+    "ai": false
+  },
+  "catalog": {
+    "rule_count": 14,
+    "policy_sources_version": "2026.10.14",
+    "policy_snapshot": {
+      "version": "2026.10.14",
+      "verified_on": "2026-10-14",
+      "review_by": "2027-04-30",
+      "stale": false
+    }
+  },
+  "summary": {
+    "readiness": "blocking-issues",
+    "headline": "5 issue(s) with clear evidence must be fixed before release",
+    "by_status": {
+      "fail": 5,
+      "warn": 19,
+      "needs_review": 5,
+      "info": 0
+    },
+    "by_severity": {
+      "error": 3,
+      "high": 11,
+      "medium": 12,
+      "low": 3,
+      "info": 0
+    },
+    "rules": {
+      "pass": 0,
+      "fail": 5,
+      "warn": 7,
+      "needs_review": 2,
+      "info": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "threshold_exceeded": true,
+    "hidden_below_severity": 0,
+    "suppressed": 0
+  },
+  "findings": [
+    {
+      "rule_id": "google.target-api-level",
+      "rule_version": "0.1.0",
+      "platform": "android",
+      "framework": "flutter",
+      "status": "fail",
+      "severity": "error",
+      "confidence": "high",
+      "title": "targetSdk 34 is below Google Play's requirement (API 36)",
+      "explanation": "Since 2026-08-31, new apps and app updates (phone-tablet) must target API level 36 or higher to be submitted. Play Console will reject this upload.",
+      "evidence": [
+        {
+          "file": "android/app/build.gradle",
+          "line": 14,
+          "key": "targetSdk",
+          "value": "34",
+          "description": "Target SDK"
+        }
+      ],
+      "recommendation": "Raise targetSdk to 36 or higher, review the Android behavior changes for each version you skip, and update plugins that pin older SDKs.",
+      "references": [
+        {
+          "id": "google.target-api-requirements",
+          "title": "Meet Google Play's target API level requirement",
+          "url": "https://developer.android.com/google/play/requirements/target-sdk"
+        },
+        {
+          "id": "google.target-api-policy",
+          "title": "Target API level requirements for Google Play apps (Play Console Help)",
+          "url": "https://support.google.com/googleplay/android-developer/answer/11926878"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "987bd6f1ff2b"
+    },
+    {
+      "rule_id": "shared.app-identifier",
+      "rule_version": "0.1.0",
+      "platform": "android",
+      "framework": "flutter",
+      "status": "fail",
+      "severity": "error",
+      "confidence": "high",
+      "title": "Android application ID uses the reserved prefix \"com.example\" (com.example.health_tracker)",
+      "explanation": "Google Play does not accept packages that start with com.example. The application ID is permanent once the app is published.",
+      "evidence": [
+        {
+          "file": "android/app/build.gradle",
+          "line": 12,
+          "key": "applicationId",
+          "value": "com.example.health_tracker",
+          "description": "Android application ID"
+        }
+      ],
+      "recommendation": "Choose a reverse-domain ID you own (e.g. com.yourcompany.app), set applicationId, and update namespace, MainActivity package and Firebase/Google config files to match.",
+      "references": [
+        {
+          "id": "google.application-id",
+          "title": "Configure the app module (application ID)",
+          "url": "https://developer.android.com/build/configure-app-module"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "0634be017e42"
+    },
+    {
+      "rule_id": "shared.release-version",
+      "rule_version": "0.1.0",
+      "platform": "ios",
+      "framework": "flutter",
+      "status": "fail",
+      "severity": "error",
+      "confidence": "high",
+      "title": "Version name \"1.3.0-beta\" is not a valid App Store version",
+      "explanation": "Version name must be one to three period-separated integers (e.g. 1.4.2). App Store Connect rejects uploads with suffixes such as -beta or letters.",
+      "evidence": [
+        {
+          "file": "pubspec.yaml",
+          "line": 4,
+          "key": "version",
+          "value": "1.3.0-beta+7",
+          "description": "Flutter app version"
+        }
+      ],
+      "recommendation": "Use a plain numeric version (e.g. 1.4.2) and put pre-release labels in the build number or release notes instead.",
+      "references": [
+        {
+          "id": "apple.cfbundleshortversionstring",
+          "title": "CFBundleShortVersionString",
+          "url": "https://developer.apple.com/documentation/bundleresources/information-property-list/cfbundleshortversionstring"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "27e45f0ce1a4"
+    },
+    {
+      "rule_id": "apple.permission-purpose-string",
+      "rule_version": "0.1.0",
+      "platform": "ios",
+      "framework": "flutter",
+      "status": "fail",
+      "severity": "high",
+      "confidence": "high",
+      "title": "Empty purpose string: NSCameraUsageDescription",
+      "explanation": "NSCameraUsageDescription is declared but has no text. iOS shows this string in the permission prompt, and App Review rejects prompts that do not explain the purpose.",
+      "evidence": [
+        {
+          "file": "ios/Runner/Info.plist",
+          "line": 13,
+          "key": "NSCameraUsageDescription",
+          "value": "",
+          "description": "Purpose string is empty"
+        }
+      ],
+      "recommendation": "Write a specific sentence describing what the app does with this access, e.g. \"Scan receipts to add expenses.\" Remove the key if the feature does not exist.",
+      "references": [
+        {
+          "id": "apple.guideline-5-1-1-data-collection",
+          "title": "App Review Guidelines 5.1.1 – Data Collection and Storage",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage"
+        },
+        {
+          "id": "apple.info-plist",
+          "title": "Information Property List (purpose strings / usage descriptions)",
+          "url": "https://developer.apple.com/documentation/bundleresources/information-property-list"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "c109e30c118f"
+    },
+    {
+      "rule_id": "shared.debug-configuration",
+      "rule_version": "0.1.0",
+      "platform": "android",
+      "framework": "flutter",
+      "status": "fail",
+      "severity": "high",
+      "confidence": "high",
+      "title": "Release build is signed with the debug key",
+      "explanation": "The release build type uses signingConfigs.debug (the default in new Flutter projects). Google Play rejects bundles signed with a debug certificate, and the debug key is not yours to keep.",
+      "evidence": [
+        {
+          "file": "android/app/build.gradle",
+          "line": 23,
+          "key": "buildTypes.release.signingConfig",
+          "value": "signingConfigs.debug",
+          "description": "Release signing config"
+        }
+      ],
+      "recommendation": "Create an upload keystore, reference it from a release signingConfig loaded from key.properties (kept out of git), and enroll in Play App Signing.",
+      "references": [
+        {
+          "id": "google.app-signing",
+          "title": "Sign your app",
+          "url": "https://developer.android.com/studio/publish/app-signing"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "5bd0edd8e87c"
+    },
+    {
+      "rule_id": "apple.required-reason-api",
+      "rule_version": "0.1.0",
+      "platform": "ios",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "high",
+      "confidence": "medium",
+      "title": "Required reason APIs used without an app privacy manifest",
+      "explanation": "App-owned iOS code appears to use User defaults APIs, but no PrivacyInfo.xcprivacy was found. Apple requires apps to declare approved reasons for these APIs; uploads without them receive ITMS-91053.",
+      "evidence": [
+        {
+          "file": "ios/Runner/AppDelegate.swift",
+          "line": 10,
+          "value": "let launches = UserDefaults.standard.integer(forKey: \"launchCount\")",
+          "description": "User defaults API (NSPrivacyAccessedAPICategoryUserDefaults)"
+        },
+        {
+          "file": "ios/Runner/AppDelegate.swift",
+          "line": 11,
+          "value": "UserDefaults.standard.set(launches + 1, forKey: \"launchCount\")",
+          "description": "User defaults API (NSPrivacyAccessedAPICategoryUserDefaults)"
+        }
+      ],
+      "recommendation": "Add PrivacyInfo.xcprivacy to the app target (Xcode: File > New > File > App Privacy) and declare each category with the reason code that matches your use.",
+      "references": [
+        {
+          "id": "apple.required-reason-api",
+          "title": "Describing use of required reason API",
+          "url": "https://developer.apple.com/documentation/bundleresources/describing-use-of-required-reason-api"
+        },
+        {
+          "id": "apple.privacy-manifest",
+          "title": "Privacy manifest files",
+          "url": "https://developer.apple.com/documentation/bundleresources/privacy-manifest-files"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "ca0cebb3aef1"
+    },
+    {
+      "rule_id": "google.account-deletion-web",
+      "rule_version": "0.1.0",
+      "platform": "android",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "high",
+      "confidence": "medium",
+      "title": "No web account deletion URL declared",
+      "explanation": "Google Play requires apps that allow account creation to provide a web link where users can request account and data deletion without reinstalling the app. The link is entered in the Data safety form; the scanner cannot see Play Console, so it relies on your declaration.",
+      "evidence": [
+        {
+          "file": "pubspec.yaml",
+          "key": "firebase_auth",
+          "value": "^5.3.1",
+          "description": "Direct dependency firebase_auth"
+        },
+        {
+          "file": "lib/auth.dart",
+          "line": 7,
+          "value": "return _auth.createUserWithEmailAndPassword(email: email, password: password);",
+          "description": "Sign-up signal"
+        },
+        {
+          "file": ".release-doctor.yml",
+          "key": "app.account_deletion.web_url",
+          "description": "Not declared"
+        }
+      ],
+      "recommendation": "Publish a page that explains how to request deletion (and what data is deleted or retained), enter it in Play Console > App content > Data safety, and record it as app.account_deletion.web_url.",
+      "references": [
+        {
+          "id": "google.account-deletion",
+          "title": "Understanding Google Play's app account deletion requirements",
+          "url": "https://support.google.com/googleplay/android-developer/answer/13327111"
+        },
+        {
+          "id": "google.data-safety",
+          "title": "Provide information for Google Play's Data safety section",
+          "url": "https://support.google.com/googleplay/android-developer/answer/10787469"
+        }
+      ],
+      "verification": "developer-declared",
+      "fingerprint": "b06e530f1b73"
+    },
+    {
+      "rule_id": "google.sensitive-permissions",
+      "rule_version": "0.1.0",
+      "platform": "android",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "high",
+      "confidence": "high",
+      "title": "Background location requires a Play Console declaration and review",
+      "explanation": "Apps that access location in the background must show the feature is core to the app, provide a prominent in-app disclosure, and submit the location permissions declaration with a video. Requested: ACCESS_BACKGROUND_LOCATION.",
+      "evidence": [
+        {
+          "file": "android/app/src/main/AndroidManifest.xml",
+          "line": 4,
+          "key": "uses-permission",
+          "value": "android.permission.ACCESS_BACKGROUND_LOCATION",
+          "description": "Requested permission"
+        }
+      ],
+      "recommendation": "Remove background location unless it is essential. If it is, prepare the declaration form, a demo video, and the prominent disclosure before submitting.",
+      "references": [
+        {
+          "id": "google.background-location",
+          "title": "Requesting access to location in the background",
+          "url": "https://support.google.com/googleplay/android-developer/answer/9799150"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "33f3e36178f5"
+    },
+    {
+      "rule_id": "google.sensitive-permissions",
+      "rule_version": "0.1.0",
+      "platform": "android",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "high",
+      "confidence": "high",
+      "title": "Broad photo/video access needs a qualifying use or the photo picker",
+      "explanation": "Under Google Play's Photo and Video Permissions policy, only apps whose core functionality needs broad access to photos/videos may request READ_MEDIA_IMAGES/READ_MEDIA_VIDEO, and they must declare it. Apps with occasional needs must use the Android photo picker. Requested: READ_MEDIA_IMAGES.",
+      "evidence": [
+        {
+          "file": "android/app/src/main/AndroidManifest.xml",
+          "line": 5,
+          "key": "uses-permission",
+          "value": "android.permission.READ_MEDIA_IMAGES",
+          "description": "Requested permission"
+        }
+      ],
+      "recommendation": "Switch to the system photo picker (image_picker on recent versions uses it) and remove the permissions, or submit the declaration if broad access is core.",
+      "references": [
+        {
+          "id": "google.photo-video-permissions",
+          "title": "Google Play's Photo and Video Permissions policy",
+          "url": "https://support.google.com/googleplay/android-developer/answer/14115180"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "37b47be88ed2"
+    },
+    {
+      "rule_id": "shared.account-deletion-in-app",
+      "rule_version": "0.1.0",
+      "platform": "all",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "high",
+      "confidence": "medium",
+      "title": "App appears to create accounts but no in-app deletion flow was found",
+      "explanation": "Both Apple (Guideline 5.1.1(v)) and Google Play require apps that support account creation to let users initiate account deletion from within the app. The scanner found account-creation signals but no deletion flow.",
+      "evidence": [
+        {
+          "file": "pubspec.yaml",
+          "key": "firebase_auth",
+          "value": "^5.3.1",
+          "description": "Direct dependency firebase_auth"
+        },
+        {
+          "file": "lib/auth.dart",
+          "line": 7,
+          "value": "return _auth.createUserWithEmailAndPassword(email: email, password: password);",
+          "description": "Sign-up / registration signal"
+        }
+      ],
+      "recommendation": "Add a clearly labelled “Delete account” action (e.g. in Settings > Account) that deletes the account and associated data, then record the path in .release-doctor.yml (app.account_deletion.in_app_path).",
+      "references": [
+        {
+          "id": "apple.account-deletion",
+          "title": "Offering account deletion in your app",
+          "url": "https://developer.apple.com/support/offering-account-deletion-in-your-app/"
+        },
+        {
+          "id": "apple.guideline-5-1-1-data-collection",
+          "title": "App Review Guidelines 5.1.1 – Data Collection and Storage",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage"
+        },
+        {
+          "id": "google.account-deletion",
+          "title": "Understanding Google Play's app account deletion requirements",
+          "url": "https://support.google.com/googleplay/android-developer/answer/13327111"
+        }
+      ],
+      "verification": "source-heuristic",
+      "fingerprint": "43b83933a0d7"
+    },
+    {
+      "rule_id": "shared.app-identifier",
+      "rule_version": "0.1.0",
+      "platform": "ios",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "high",
+      "confidence": "high",
+      "title": "iOS bundle identifier is still the template value (com.example.healthTracker)",
+      "explanation": "com.example identifiers come from project templates. The bundle ID must match an App ID registered to your team and cannot be changed after release.",
+      "evidence": [
+        {
+          "file": "ios/Runner.xcodeproj/project.pbxproj",
+          "line": 8,
+          "key": "PRODUCT_BUNDLE_IDENTIFIER",
+          "value": "com.example.healthTracker",
+          "description": "iOS bundle identifier"
+        }
+      ],
+      "recommendation": "Register your own bundle ID in the Apple Developer portal and set PRODUCT_BUNDLE_IDENTIFIER for the app target and its extensions.",
+      "references": [
+        {
+          "id": "apple.app-review-guidelines",
+          "title": "App Review Guidelines",
+          "url": "https://developer.apple.com/app-store/review/guidelines/"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "cc049cf31b2c"
+    },
+    {
+      "rule_id": "shared.embedded-secrets",
+      "rule_version": "0.1.0",
+      "platform": "all",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "high",
+      "confidence": "medium",
+      "title": "Signing passwords in android/key.properties",
+      "explanation": "key.properties holds the upload keystore passwords. It should stay out of version control.",
+      "evidence": [
+        {
+          "file": "android/key.properties",
+          "line": 1,
+          "key": "storePassword",
+          "value": "[redacted]",
+          "description": "Keystore password"
+        }
+      ],
+      "recommendation": "Add key.properties to .gitignore, remove it from git history, and rotate the passwords if they were pushed.",
+      "references": [
+        {
+          "id": "apple.guideline-5-1-1-data-collection",
+          "title": "App Review Guidelines 5.1.1 – Data Collection and Storage",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage"
+        },
+        {
+          "id": "google.user-data-policy",
+          "title": "User Data policy (privacy policy requirements)",
+          "url": "https://support.google.com/googleplay/android-developer/answer/10144311"
+        }
+      ],
+      "verification": "deterministic",
+      "fingerprint": "b89bb6d293f2"
+    },
+    {
+      "rule_id": "shared.placeholder-content",
+      "rule_version": "0.1.0",
+      "platform": "all",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "high",
+      "confidence": "medium",
+      "title": "App still contains the Flutter counter template",
+      "explanation": "Template screens indicate the app may be incomplete. Apple rejects incomplete apps (Guideline 2.1) and apps with minimal functionality (4.2); Google Play has a similar minimum functionality policy.",
+      "evidence": [
+        {
+          "file": "lib/main.dart",
+          "line": 14,
+          "value": "home: const MyHomePage(title: 'Flutter Demo Home Page'),",
+          "description": "Template text"
+        },
+        {
+          "file": "lib/main.dart",
+          "line": 40,
+          "value": "const Text('You have pushed the button this many times:'),",
+          "description": "Template text"
+        }
+      ],
+      "recommendation": "Remove the template screen and make sure the release build opens to real app content.",
+      "references": [
+        {
+          "id": "apple.guideline-2-1-app-completeness",
+          "title": "App Review Guidelines 2.1 – App Completeness",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#app-completeness"
+        },
+        {
+          "id": "apple.guideline-4-2-minimum-functionality",
+          "title": "App Review Guidelines 4.2 – Minimum Functionality",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#minimum-functionality"
+        },
+        {
+          "id": "google.minimum-functionality",
+          "title": "Spam and Minimum Functionality policy",
+          "url": "https://support.google.com/googleplay/android-developer/answer/9898783"
+        }
+      ],
+      "verification": "source-heuristic",
+      "fingerprint": "9fb38828141a"
+    },
+    {
+      "rule_id": "shared.privacy-policy",
+      "rule_version": "0.1.0",
+      "platform": "all",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "high",
+      "confidence": "high",
+      "title": "Privacy policy URL looks like a placeholder",
+      "explanation": "\"https://example.com/privacy\" does not look like a real, public policy page.",
+      "evidence": [
+        {
+          "file": ".release-doctor.yml",
+          "key": "app.privacy_policy_url",
+          "value": "https://example.com/privacy",
+          "description": "Declared privacy policy URL"
+        }
+      ],
+      "recommendation": "Replace it with the public URL of your privacy policy.",
+      "references": [
+        {
+          "id": "apple.guideline-5-1-1-data-collection",
+          "title": "App Review Guidelines 5.1.1 – Data Collection and Storage",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage"
+        },
+        {
+          "id": "apple.app-privacy-details",
+          "title": "App privacy details on the App Store",
+          "url": "https://developer.apple.com/app-store/app-privacy-details/"
+        },
+        {
+          "id": "google.user-data-policy",
+          "title": "User Data policy (privacy policy requirements)",
+          "url": "https://support.google.com/googleplay/android-developer/answer/10144311"
+        },
+        {
+          "id": "google.data-safety",
+          "title": "Provide information for Google Play's Data safety section",
+          "url": "https://support.google.com/googleplay/android-developer/answer/10787469"
+        }
+      ],
+      "verification": "developer-declared",
+      "fingerprint": "5f36ac27a908"
+    },
+    {
+      "rule_id": "apple.permission-purpose-string",
+      "rule_version": "0.1.0",
+      "platform": "ios",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "medium",
+      "confidence": "medium",
+      "title": "Purpose string needs review: NSContactsUsageDescription",
+      "explanation": "The text for NSContactsUsageDescription does not explain how the app uses the data. Apple expects the prompt to state clearly and completely why the app needs the access.",
+      "evidence": [
+        {
+          "file": "ios/Runner/Info.plist",
+          "line": 17,
+          "key": "NSContactsUsageDescription",
+          "value": "This app needs access to your contacts",
+          "description": "Current purpose string"
+        }
+      ],
+      "recommendation": "Describe the concrete feature that uses this access, in the language of the app's UI, and localize it via InfoPlist.strings when the app is localized.",
+      "references": [
+        {
+          "id": "apple.guideline-5-1-1-data-collection",
+          "title": "App Review Guidelines 5.1.1 – Data Collection and Storage",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage"
+        },
+        {
+          "id": "apple.info-plist",
+          "title": "Information Property List (purpose strings / usage descriptions)",
+          "url": "https://developer.apple.com/documentation/bundleresources/information-property-list"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "548ab5f4c3be"
+    },
+    {
+      "rule_id": "apple.permission-purpose-string",
+      "rule_version": "0.1.0",
+      "platform": "ios",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "medium",
+      "confidence": "medium",
+      "title": "Purpose string needs review: NSLocationWhenInUseUsageDescription",
+      "explanation": "The text for NSLocationWhenInUseUsageDescription is too short to explain the purpose. Apple expects the prompt to state clearly and completely why the app needs the access.",
+      "evidence": [
+        {
+          "file": "ios/Runner/Info.plist",
+          "line": 15,
+          "key": "NSLocationWhenInUseUsageDescription",
+          "value": "Location",
+          "description": "Current purpose string"
+        }
+      ],
+      "recommendation": "Describe the concrete feature that uses this access, in the language of the app's UI, and localize it via InfoPlist.strings when the app is localized.",
+      "references": [
+        {
+          "id": "apple.guideline-5-1-1-data-collection",
+          "title": "App Review Guidelines 5.1.1 – Data Collection and Storage",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage"
+        },
+        {
+          "id": "apple.info-plist",
+          "title": "Information Property List (purpose strings / usage descriptions)",
+          "url": "https://developer.apple.com/documentation/bundleresources/information-property-list"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "cb2ad98ea459"
+    },
+    {
+      "rule_id": "shared.debug-configuration",
+      "rule_version": "0.1.0",
+      "platform": "android",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "medium",
+      "confidence": "high",
+      "title": "Cleartext (HTTP) traffic is allowed for all domains",
+      "explanation": "android:usesCleartextTraffic=\"true\" in src/main enables unencrypted traffic in release builds.",
+      "evidence": [
+        {
+          "file": "android/app/src/main/AndroidManifest.xml",
+          "line": 8,
+          "key": "android:usesCleartextTraffic",
+          "value": "true",
+          "description": "<application> attribute"
+        }
+      ],
+      "recommendation": "Remove it, or use a network security config that allows cleartext only for the specific domains that need it (and only in debug if possible).",
+      "references": [
+        {
+          "id": "google.cleartext-traffic",
+          "title": "Security risk: cleartext communications",
+          "url": "https://developer.android.com/privacy-and-security/risks/cleartext-communications"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "0cc5ce28dc48"
+    },
+    {
+      "rule_id": "shared.debug-configuration",
+      "rule_version": "0.1.0",
+      "platform": "ios",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "medium",
+      "confidence": "high",
+      "title": "App Transport Security is disabled (NSAllowsArbitraryLoads)",
+      "explanation": "NSAllowsArbitraryLoads turns off HTTPS enforcement for all connections. App Review may ask for a justification, and it is often a leftover from development.",
+      "evidence": [
+        {
+          "file": "ios/Runner/Info.plist",
+          "line": 21,
+          "key": "NSAppTransportSecurity.NSAllowsArbitraryLoads",
+          "value": "true",
+          "description": "ATS exception"
+        }
+      ],
+      "recommendation": "Remove it and add NSExceptionDomains only for hosts that cannot use HTTPS, or move the exception to a debug-only Info.plist.",
+      "references": [
+        {
+          "id": "apple.app-transport-security",
+          "title": "NSAppTransportSecurity",
+          "url": "https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "377164a042bc"
+    },
+    {
+      "rule_id": "shared.embedded-secrets",
+      "rule_version": "0.1.0",
+      "platform": "all",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "medium",
+      "confidence": "low",
+      "title": "Possible hard-coded secret \"backendApiSecret\" in lib/config.dart",
+      "explanation": "A credential-like name is assigned a literal value. It may be a real secret or a harmless identifier; the scanner cannot tell.",
+      "evidence": [
+        {
+          "file": "lib/config.dart",
+          "line": 2,
+          "key": "backendApiSecret",
+          "value": "q8Zt…[redacted 24 chars]",
+          "description": "Credential-like assignment"
+        }
+      ],
+      "recommendation": "If it is a secret, move it to your backend or a CI secret. If it is public by design, add an ignore entry with the reason in .release-doctor.yml.",
+      "references": [
+        {
+          "id": "apple.guideline-5-1-1-data-collection",
+          "title": "App Review Guidelines 5.1.1 – Data Collection and Storage",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage"
+        },
+        {
+          "id": "google.user-data-policy",
+          "title": "User Data policy (privacy policy requirements)",
+          "url": "https://support.google.com/googleplay/android-developer/answer/10144311"
+        }
+      ],
+      "verification": "deterministic",
+      "fingerprint": "5e83421520b9"
+    },
+    {
+      "rule_id": "shared.placeholder-content",
+      "rule_version": "0.1.0",
+      "platform": "all",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "medium",
+      "confidence": "medium",
+      "title": "Lorem ipsum placeholder text found",
+      "explanation": "Placeholder text in shipped screens is a common App Completeness rejection reason. Matches in unused code or tests are harmless.",
+      "evidence": [
+        {
+          "file": "lib/main.dart",
+          "line": 42,
+          "value": "const Text('Lorem ipsum dolor sit amet'),",
+          "description": "Placeholder text"
+        }
+      ],
+      "recommendation": "Replace placeholder text with final copy, or confirm these strings are not reachable in the release build.",
+      "references": [
+        {
+          "id": "apple.guideline-2-1-app-completeness",
+          "title": "App Review Guidelines 2.1 – App Completeness",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#app-completeness"
+        },
+        {
+          "id": "apple.guideline-4-2-minimum-functionality",
+          "title": "App Review Guidelines 4.2 – Minimum Functionality",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#minimum-functionality"
+        },
+        {
+          "id": "google.minimum-functionality",
+          "title": "Spam and Minimum Functionality policy",
+          "url": "https://support.google.com/googleplay/android-developer/answer/9898783"
+        }
+      ],
+      "verification": "source-heuristic",
+      "fingerprint": "a3a39557e40c"
+    },
+    {
+      "rule_id": "shared.privacy-policy",
+      "rule_version": "0.1.0",
+      "platform": "all",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "medium",
+      "confidence": "low",
+      "title": "Privacy policy may not cover Google Analytics for Firebase",
+      "explanation": "The project includes firebase_analytics (analytics), but privacy-policy.md does not mention it or its purpose. The SDK's actual data collection depends on how it is configured.",
+      "evidence": [
+        {
+          "file": "pubspec.yaml",
+          "key": "firebase_analytics",
+          "value": "^11.3.3",
+          "description": "Google Analytics for Firebase SDK"
+        },
+        {
+          "file": "privacy-policy.md",
+          "description": "Policy document checked"
+        }
+      ],
+      "recommendation": "Check Google Analytics for Firebase's data disclosure documentation and your configuration, then describe the data, purpose and recipient in the policy, App Privacy details and Data safety form.",
+      "references": [
+        {
+          "id": "apple.guideline-5-1-1-data-collection",
+          "title": "App Review Guidelines 5.1.1 – Data Collection and Storage",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage"
+        },
+        {
+          "id": "apple.app-privacy-details",
+          "title": "App privacy details on the App Store",
+          "url": "https://developer.apple.com/app-store/app-privacy-details/"
+        },
+        {
+          "id": "google.user-data-policy",
+          "title": "User Data policy (privacy policy requirements)",
+          "url": "https://support.google.com/googleplay/android-developer/answer/10144311"
+        },
+        {
+          "id": "google.data-safety",
+          "title": "Provide information for Google Play's Data safety section",
+          "url": "https://support.google.com/googleplay/android-developer/answer/10787469"
+        }
+      ],
+      "verification": "developer-declared",
+      "fingerprint": "b80e4dfa45c5"
+    },
+    {
+      "rule_id": "shared.release-version",
+      "rule_version": "0.1.0",
+      "platform": "android",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "medium",
+      "confidence": "high",
+      "title": "Hard-coded versionName overrides pubspec.yaml",
+      "explanation": "build.gradle sets versionName \"1.3.0\" but pubspec.yaml says 1.3.0-beta.",
+      "evidence": [
+        {
+          "file": "android/app/build.gradle",
+          "line": 16,
+          "key": "versionName",
+          "value": "\"1.3.0\"",
+          "description": "Hard-coded in Gradle"
+        }
+      ],
+      "recommendation": "Use `versionName flutter.versionName`.",
+      "references": [
+        {
+          "id": "google.versioning",
+          "title": "Version your app",
+          "url": "https://developer.android.com/studio/publish/versioning"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "b303efd45a0a"
+    },
+    {
+      "rule_id": "shared.release-version",
+      "rule_version": "0.1.0",
+      "platform": "android",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "medium",
+      "confidence": "high",
+      "title": "Hard-coded versionCode overrides pubspec.yaml",
+      "explanation": "build.gradle sets versionCode 3, but pubspec.yaml says build 7. Bumping pubspec.yaml will not change the Android build, which leads to \"version code already used\" upload errors.",
+      "evidence": [
+        {
+          "file": "android/app/build.gradle",
+          "line": 15,
+          "key": "versionCode",
+          "value": "3",
+          "description": "Hard-coded in Gradle"
+        },
+        {
+          "file": "pubspec.yaml",
+          "line": 4,
+          "key": "version",
+          "value": "1.3.0-beta+7",
+          "description": "pubspec.yaml version"
+        }
+      ],
+      "recommendation": "Use `versionCode flutter.versionCode` (Groovy) or `versionCode = flutter.versionCode` (Kotlin DSL).",
+      "references": [
+        {
+          "id": "google.versioning",
+          "title": "Version your app",
+          "url": "https://developer.android.com/studio/publish/versioning"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "ee71c224926f"
+    },
+    {
+      "rule_id": "shared.permission-usage-evidence",
+      "rule_version": "0.1.0",
+      "platform": "all",
+      "framework": "flutter",
+      "status": "needs_review",
+      "severity": "medium",
+      "confidence": "low",
+      "title": "Photo library permission may be unnecessary",
+      "explanation": "The app declares photo library access, but the scanner found no known photo library dependency or API call in the scanned sources. This needs verification; it is not proof of a policy violation.",
+      "evidence": [
+        {
+          "file": "android/app/src/main/AndroidManifest.xml",
+          "line": 5,
+          "key": "android.permission.READ_MEDIA_IMAGES",
+          "description": "Declared Android permission"
+        },
+        {
+          "description": "No photo library dependency or API usage found in 4 scanned source file(s)"
+        }
+      ],
+      "recommendation": "Confirm which feature or dependency uses photo library. If none does, remove the permission and its purpose string; both stores reject or question permissions the app does not need.",
+      "references": [
+        {
+          "id": "apple.guideline-5-1-1-data-collection",
+          "title": "App Review Guidelines 5.1.1 – Data Collection and Storage",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage"
+        },
+        {
+          "id": "google.sensitive-permissions",
+          "title": "Permissions and APIs that Access Sensitive Information",
+          "url": "https://support.google.com/googleplay/android-developer/answer/9888170"
+        }
+      ],
+      "verification": "source-heuristic",
+      "fingerprint": "a14505fb0137"
+    },
+    {
+      "rule_id": "shared.permission-usage-evidence",
+      "rule_version": "0.1.0",
+      "platform": "all",
+      "framework": "flutter",
+      "status": "needs_review",
+      "severity": "medium",
+      "confidence": "low",
+      "title": "Contacts permission may be unnecessary",
+      "explanation": "The app declares contacts access, but the scanner found no known contacts dependency or API call in the scanned sources. This needs verification; it is not proof of a policy violation.",
+      "evidence": [
+        {
+          "file": "ios/Runner/Info.plist",
+          "line": 17,
+          "key": "NSContactsUsageDescription",
+          "description": "Declared iOS purpose string"
+        },
+        {
+          "description": "No contacts dependency or API usage found in 4 scanned source file(s)"
+        }
+      ],
+      "recommendation": "Confirm which feature or dependency uses contacts. If none does, remove the permission and its purpose string; both stores reject or question permissions the app does not need.",
+      "references": [
+        {
+          "id": "apple.guideline-5-1-1-data-collection",
+          "title": "App Review Guidelines 5.1.1 – Data Collection and Storage",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage"
+        },
+        {
+          "id": "google.sensitive-permissions",
+          "title": "Permissions and APIs that Access Sensitive Information",
+          "url": "https://support.google.com/googleplay/android-developer/answer/9888170"
+        }
+      ],
+      "verification": "source-heuristic",
+      "fingerprint": "e7314c585d23"
+    },
+    {
+      "rule_id": "shared.review-access",
+      "rule_version": "0.1.0",
+      "platform": "all",
+      "framework": "flutter",
+      "status": "needs_review",
+      "severity": "medium",
+      "confidence": "low",
+      "title": "Confirm reviewers can sign in",
+      "explanation": "The app appears to have accounts. If any feature requires signing in, reviewers need working credentials or a demo mode.",
+      "evidence": [
+        {
+          "file": "pubspec.yaml",
+          "key": "firebase_auth",
+          "value": "^5.3.1",
+          "description": "Direct dependency firebase_auth"
+        },
+        {
+          "file": "lib/auth.dart",
+          "line": 7,
+          "value": "return _auth.createUserWithEmailAndPassword(email: email, password: password);",
+          "description": "Sign-up / login signal"
+        }
+      ],
+      "recommendation": "Set app.requires_login_for_review and app.review_demo_account_provided in .release-doctor.yml after preparing the reviewer account.",
+      "references": [
+        {
+          "id": "apple.guideline-2-1-app-completeness",
+          "title": "App Review Guidelines 2.1 – App Completeness",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#app-completeness"
+        }
+      ],
+      "verification": "developer-declared",
+      "fingerprint": "df433a028fc0"
+    },
+    {
+      "rule_id": "shared.placeholder-content",
+      "rule_version": "0.1.0",
+      "platform": "android",
+      "framework": "flutter",
+      "status": "warn",
+      "severity": "low",
+      "confidence": "medium",
+      "title": "Launcher label looks like a package name (\"health_tracker\")",
+      "explanation": "Project templates set the launcher label to the project's snake_case name; it is what users see under the icon.",
+      "evidence": [
+        {
+          "file": "android/app/src/main/AndroidManifest.xml",
+          "line": 7,
+          "key": "android:label",
+          "value": "health_tracker",
+          "description": "<application android:label>"
+        }
+      ],
+      "recommendation": "Set android:label to the app's display name (or a @string resource).",
+      "references": [
+        {
+          "id": "apple.guideline-2-1-app-completeness",
+          "title": "App Review Guidelines 2.1 – App Completeness",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#app-completeness"
+        },
+        {
+          "id": "apple.guideline-4-2-minimum-functionality",
+          "title": "App Review Guidelines 4.2 – Minimum Functionality",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#minimum-functionality"
+        },
+        {
+          "id": "google.minimum-functionality",
+          "title": "Spam and Minimum Functionality policy",
+          "url": "https://support.google.com/googleplay/android-developer/answer/9898783"
+        }
+      ],
+      "verification": "source-heuristic",
+      "fingerprint": "2605975256b5"
+    },
+    {
+      "rule_id": "google.sensitive-permissions",
+      "rule_version": "0.1.0",
+      "platform": "android",
+      "framework": "flutter",
+      "status": "needs_review",
+      "severity": "low",
+      "confidence": "medium",
+      "title": "Permissions that must be reflected in the Data safety form",
+      "explanation": "The app requests ACCESS_FINE_LOCATION, CAMERA. If the app collects or shares the related data, the Data safety form must disclose it.",
+      "evidence": [
+        {
+          "file": "android/app/src/main/AndroidManifest.xml",
+          "line": 3,
+          "key": "uses-permission",
+          "value": "android.permission.ACCESS_FINE_LOCATION",
+          "description": "Requested permission"
+        },
+        {
+          "file": "android/app/src/main/AndroidManifest.xml",
+          "line": 2,
+          "key": "uses-permission",
+          "value": "android.permission.CAMERA",
+          "description": "Requested permission"
+        }
+      ],
+      "recommendation": "For each permission, decide which data type it produces (e.g. precise location, photos, audio), whether it leaves the device, and declare it in Play Console > App content > Data safety.",
+      "references": [
+        {
+          "id": "google.data-safety",
+          "title": "Provide information for Google Play's Data safety section",
+          "url": "https://support.google.com/googleplay/android-developer/answer/10787469"
+        }
+      ],
+      "verification": "config-parse",
+      "fingerprint": "cde33fb6411f"
+    },
+    {
+      "rule_id": "shared.placeholder-content",
+      "rule_version": "0.1.0",
+      "platform": "all",
+      "framework": "flutter",
+      "status": "needs_review",
+      "severity": "low",
+      "confidence": "low",
+      "title": "Unfinished-feature labels found",
+      "explanation": "Labels such as “Coming soon” suggest features that reviewers cannot use. Reviewers may treat visible placeholders as incomplete functionality.",
+      "evidence": [
+        {
+          "file": "lib/main.dart",
+          "line": 43,
+          "value": "const Text('Coming soon'),",
+          "description": "Unfinished feature label"
+        }
+      ],
+      "recommendation": "Hide unfinished features in release builds (feature flags) rather than showing placeholder screens or buttons.",
+      "references": [
+        {
+          "id": "apple.guideline-2-1-app-completeness",
+          "title": "App Review Guidelines 2.1 – App Completeness",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#app-completeness"
+        },
+        {
+          "id": "apple.guideline-4-2-minimum-functionality",
+          "title": "App Review Guidelines 4.2 – Minimum Functionality",
+          "url": "https://developer.apple.com/app-store/review/guidelines/#minimum-functionality"
+        },
+        {
+          "id": "google.minimum-functionality",
+          "title": "Spam and Minimum Functionality policy",
+          "url": "https://support.google.com/googleplay/android-developer/answer/9898783"
+        }
+      ],
+      "verification": "source-heuristic",
+      "fingerprint": "6a84a99059ad"
+    }
+  ],
+  "rule_results": [
+    {
+      "rule_id": "google.account-deletion-web",
+      "rule_version": "0.1.0",
+      "title": "Web link for account deletion requests is declared",
+      "outcome": "warn",
+      "finding_count": 1
+    },
+    {
+      "rule_id": "google.sensitive-permissions",
+      "rule_version": "0.1.0",
+      "title": "Sensitive Android permissions have a policy path",
+      "outcome": "warn",
+      "finding_count": 3
+    },
+    {
+      "rule_id": "google.target-api-level",
+      "rule_version": "0.1.0",
+      "title": "targetSdk meets Google Play's current requirement",
+      "outcome": "fail",
+      "finding_count": 1
+    },
+    {
+      "rule_id": "apple.permission-purpose-string",
+      "rule_version": "0.1.0",
+      "title": "Permission purpose strings are present and specific",
+      "outcome": "fail",
+      "finding_count": 3
+    },
+    {
+      "rule_id": "apple.required-reason-api",
+      "rule_version": "0.1.0",
+      "title": "Required reason APIs are declared in the privacy manifest",
+      "outcome": "warn",
+      "finding_count": 1
+    },
+    {
+      "rule_id": "shared.account-deletion-in-app",
+      "rule_version": "0.1.0",
+      "title": "Apps with account creation offer in-app account deletion",
+      "outcome": "warn",
+      "finding_count": 1
+    },
+    {
+      "rule_id": "shared.app-identifier",
+      "rule_version": "0.1.0",
+      "title": "Application ID and bundle identifier are not template values",
+      "outcome": "fail",
+      "finding_count": 2
+    },
+    {
+      "rule_id": "shared.debug-configuration",
+      "rule_version": "0.1.0",
+      "title": "Release builds do not use debug configuration",
+      "outcome": "fail",
+      "finding_count": 3
+    },
+    {
+      "rule_id": "shared.embedded-secrets",
+      "rule_version": "0.1.0",
+      "title": "No credentials embedded in the project",
+      "outcome": "warn",
+      "finding_count": 2
+    },
+    {
+      "rule_id": "shared.permission-usage-evidence",
+      "rule_version": "0.1.0",
+      "title": "Declared permissions have a matching feature",
+      "outcome": "needs_review",
+      "finding_count": 2
+    },
+    {
+      "rule_id": "shared.placeholder-content",
+      "rule_version": "0.1.0",
+      "title": "No template or placeholder content",
+      "outcome": "warn",
+      "finding_count": 4
+    },
+    {
+      "rule_id": "shared.privacy-policy",
+      "rule_version": "0.1.0",
+      "title": "Privacy policy is available and covers detected SDKs",
+      "outcome": "warn",
+      "finding_count": 2
+    },
+    {
+      "rule_id": "shared.release-version",
+      "rule_version": "0.1.0",
+      "title": "Version name and build number are valid and consistent",
+      "outcome": "fail",
+      "finding_count": 3
+    },
+    {
+      "rule_id": "shared.review-access",
+      "rule_version": "0.1.0",
+      "title": "Reviewers can access account-based features",
+      "outcome": "needs_review",
+      "finding_count": 1
+    }
+  ],
+  "suppressed": [],
+  "diagnostics": [],
+  "disclaimer": "Automated checks cannot guarantee App Store or Google Play approval. Passing rules mean no issue was detected with the available evidence; items marked needs_review require a human decision."
+}

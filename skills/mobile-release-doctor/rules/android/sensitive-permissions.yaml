@@ -1,0 +1,34 @@
+id: google.sensitive-permissions
+version: 0.1.0
+title: Sensitive Android permissions have a policy path
+description: >
+  Lists permissions in src/main manifests (and Expo android.permissions)
+  that Google Play restricts or requires a declaration for, and the
+  permissions whose data must appear in the Data safety form.
+platforms: [android]
+frameworks: [flutter, react-native, expo, native-android]
+category: permissions
+severity: high
+max_severity: high
+allowed_statuses: [warn, needs_review]
+requirement_status: verified
+verification:
+  level: config-parse
+  last_verified: 2026-10-14
+policy_references:
+  - google.sensitive-permissions
+  - google.background-location
+  - google.sms-call-log
+  - google.all-files-access
+  - google.package-visibility
+  - google.photo-video-permissions
+  - google.foreground-service
+  - google.data-safety
+recommendation: >
+  Remove sensitive permissions the app does not need (use tools:node="remove"
+  for ones merged from libraries) and prepare Play Console declarations for
+  the rest.
+limitations:
+  - Permissions added by library manifests during the manifest merge are not visible; inspect the merged manifest of a release build.
+  - Whether a use qualifies as core functionality is a human judgement.
+introduced_in: 0.1.0

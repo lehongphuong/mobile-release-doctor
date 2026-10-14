@@ -1,0 +1,11 @@
+{
+  "name": "mobile-release-doctor",
+  "displayName": "Mobile Release Doctor",
+  "version": "0.1.0",
+  "description": "Catch mobile release issues before App Review: a local, read-only scanner for Flutter, React Native, Expo and native iOS/Android projects, with evidence, official sources and fix guidance for App Store and Google Play.",
+  "author": { "name": "lehongphuong" },
+  "homepage": "https://github.com/lehongphuong/mobile-release-doctor",
+  "repository": "https://github.com/lehongphuong/mobile-release-doctor",
+  "license": "MIT",
+  "keywords": ["mobile", "release", "app-store", "google-play", "flutter", "react-native", "expo", "ios", "android", "compliance"]
+}

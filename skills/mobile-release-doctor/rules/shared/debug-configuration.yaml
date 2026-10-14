@@ -1,0 +1,29 @@
+id: shared.debug-configuration
+version: 0.1.0
+title: Release builds do not use debug configuration
+description: >
+  Flags release builds signed with the debug key, debuggable release builds,
+  global cleartext traffic on Android and globally disabled App Transport
+  Security on iOS.
+platforms: [ios, android]
+frameworks: [flutter, react-native, native-ios, native-android, expo]
+category: build-configuration
+severity: high
+max_severity: high
+allowed_statuses: [fail, warn]
+requirement_status: verified
+verification:
+  level: config-parse
+  last_verified: 2026-10-14
+policy_references:
+  - google.app-signing
+  - google.android-debuggable
+  - google.cleartext-traffic
+  - apple.app-transport-security
+recommendation: >
+  Sign release builds with your own upload key and keep debug-only settings
+  out of release configuration.
+limitations:
+  - Signing set up only in CI (environment variables, injected properties) is not visible.
+  - Per-build-type Info.plist files and xcconfig overrides are not resolved.
+introduced_in: 0.1.0

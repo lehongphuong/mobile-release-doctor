@@ -1,0 +1,27 @@
+id: google.target-api-level
+version: 0.1.0
+title: targetSdk meets Google Play's current requirement
+description: >
+  Reads targetSdk from the app module (or uses-sdk / expo-build-properties)
+  and compares it with the requirement effective on the scan date, taken
+  from the versioned policy snapshot.
+platforms: [android]
+frameworks: [flutter, react-native, expo, native-android]
+category: build-configuration
+severity: error
+max_severity: error
+allowed_statuses: [fail, needs_review]
+requirement_status: verified
+verification:
+  level: config-parse
+  last_verified: 2026-10-14
+policy_references:
+  - google.target-api-requirements
+  - google.target-api-policy
+recommendation: >
+  Raise targetSdk to the required API level after testing the behavior
+  changes of each Android version you skip.
+limitations:
+  - Computed values (flutter.targetSdkVersion, version catalogs) are not evaluated and return needs_review.
+  - Form factor is inferred from <uses-feature>; extension deadlines granted in Play Console are not known to the scanner.
+introduced_in: 0.1.0

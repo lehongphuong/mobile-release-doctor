@@ -1,0 +1,43 @@
+# Versioned, time-dependent policy data. Rules must read requirements from here
+# instead of hard-coding numbers or deadlines.
+#
+# verified_on: the date every entry below was re-read against its source.
+# review_by:   after this date the scanner treats the snapshot as stale and
+#              downgrades time-sensitive conclusions to needs_review.
+snapshot_version: "2026.10.14"
+verified_on: 2026-10-14
+review_by: 2027-04-30
+
+google_target_api:
+  # Source text (fetched 2026-10-14): "Starting August 31 2026: New apps and app updates
+  # must target Android 16 (API level 36) or higher to be submitted to Google Play; except
+  # for Wear OS and Android Automotive OS apps, which must target Android 15 (API level 35)
+  # or higher, and Android TV and Android XR apps, which must target Android 14 (API level 34)
+  # or higher."
+  - effective_from: 2026-08-31
+    min_target_sdk: 36
+    applies_to: new-apps-and-updates
+    form_factor: phone-tablet
+    source: google.target-api-requirements
+  - effective_from: 2026-08-31
+    min_target_sdk: 35
+    applies_to: new-apps-and-updates
+    form_factor: wear-os
+    source: google.target-api-requirements
+  - effective_from: 2026-08-31
+    min_target_sdk: 35
+    applies_to: new-apps-and-updates
+    form_factor: automotive
+    source: google.target-api-requirements
+  - effective_from: 2026-08-31
+    min_target_sdk: 34
+    applies_to: new-apps-and-updates
+    form_factor: android-tv
+    source: google.target-api-requirements
+  # Previous requirement, kept so scans dated before 2026-08-31 evaluate correctly.
+  - effective_from: 2025-08-31
+    min_target_sdk: 35
+    applies_to: new-apps-and-updates
+    form_factor: phone-tablet
+    source: google.target-api-requirements
+    note: Requirement in force from 2025-08-31 until 2026-08-30.

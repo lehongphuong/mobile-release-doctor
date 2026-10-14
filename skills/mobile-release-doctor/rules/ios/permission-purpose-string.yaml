@@ -1,0 +1,28 @@
+id: apple.permission-purpose-string
+version: 0.1.0
+title: Permission purpose strings are present and specific
+description: >
+  Checks every NS*UsageDescription key in the app's Info.plist (and Expo
+  ios.infoPlist) for empty or vague text, and flags keys that a direct
+  dependency needs but the app does not declare.
+platforms: [ios]
+frameworks: [flutter, react-native, expo, native-ios]
+category: permissions
+severity: high
+max_severity: high
+allowed_statuses: [fail, warn]
+requirement_status: verified
+verification:
+  level: config-parse
+  last_verified: 2026-10-14
+policy_references:
+  - apple.guideline-5-1-1-data-collection
+  - apple.info-plist
+recommendation: >
+  Give every purpose string a specific sentence that explains which feature
+  uses the data and why. Remove keys for features the app does not have.
+limitations:
+  - The vagueness check is a heuristic for English text; localized strings are only checked for being empty or too short.
+  - Dependency-to-key mapping covers popular Flutter and React Native plugins; other SDKs may need keys the scanner does not know.
+  - Expo managed projects get purpose strings from config plugins at prebuild, so missing-key checks are skipped there.
+introduced_in: 0.1.0

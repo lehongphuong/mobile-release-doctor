@@ -1,0 +1,27 @@
+id: shared.permission-usage-evidence
+version: 0.1.0
+title: Declared permissions have a matching feature
+description: >
+  For each declared capability (camera, location, photos, contacts,
+  microphone, Bluetooth, ...), looks for a dependency or API call that uses
+  it. Declared permissions with no evidence are returned for review.
+platforms: [ios, android]
+frameworks: [flutter, react-native, expo, native-ios, native-android]
+category: permissions
+severity: medium
+max_severity: medium
+allowed_statuses: [needs_review]
+requirement_status: needs-research
+verification:
+  level: source-heuristic
+  last_verified: 2026-10-14
+policy_references:
+  - apple.guideline-5-1-1-data-collection
+  - google.sensitive-permissions
+recommendation: >
+  Confirm which feature uses each permission and remove permissions and
+  purpose strings that no feature needs.
+limitations:
+  - Absence of evidence is not proof that a permission is unused; plugins and native SDKs may use it indirectly.
+  - Only known dependencies and common API names are recognized.
+introduced_in: 0.1.0

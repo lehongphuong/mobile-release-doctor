@@ -1,0 +1,12 @@
+{
+  "name": "mobile-release-doctor",
+  "description": "Marketplace for the Mobile Release Doctor plugin",
+  "owner": { "name": "lehongphuong", "url": "https://github.com/lehongphuong" },
+  "plugins": [
+    {
+      "name": "mobile-release-doctor",
+      "source": "./",
+      "description": "Scan Flutter, React Native, Expo and native iOS/Android projects for App Store and Google Play release risks before submission."
+    }
+  ]
+}
