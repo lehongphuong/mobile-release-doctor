@@ -1,0 +1,13 @@
+// !$*UTF8*$!
+{
+	objects = {
+		97C147071CF9000F007C117D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Runner/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.healthTracker;
+			};
+			name = Release;
+		};
+	};
+}

@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "Recipe Box",
+    "slug": "recipe-box",
+    "version": "1.4.0",
+    "ios": {
+      "bundleIdentifier": "app.recipebox",
+      "buildNumber": "14",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Attach a photo from your library to a recipe so you can recognise it later."
+      }
+    },
+    "android": {
+      "package": "app.recipebox",
+      "versionCode": 14,
+      "permissions": []
+    },
+    "plugins": [
+      "expo-router",
+      ["expo-build-properties", { "android": { "targetSdkVersion": 36 } }]
+    ]
+  }
+}

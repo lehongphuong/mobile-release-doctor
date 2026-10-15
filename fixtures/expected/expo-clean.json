@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0",
+  "tool": {
+    "name": "mobile-release-doctor",
+    "version": "0.1.0"
+  },
+  "scanned_at": "2026-10-14T00:00:00.000Z",
+  "evaluation_date": "2026-10-14",
+  "project": {
+    "name": "recipe-box",
+    "framework": "expo",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "detection_signals": [
+      "package.json depends on expo"
+    ],
+    "config_file": ".release-doctor.yml",
+    "files_scanned": 4
+  },
+  "options": {
+    "platform": "all",
+    "fail_on": "high",
+    "offline": true,
+    "ai": false
+  },
+  "catalog": {
+    "rule_count": 14,
+    "policy_sources_version": "2026.10.14",
+    "policy_snapshot": {
+      "version": "2026.10.14",
+      "verified_on": "2026-10-14",
+      "review_by": "2027-04-30",
+      "stale": false
+    }
+  },
+  "summary": {
+    "readiness": "no-issues-detected",
+    "headline": "No issues detected by automated checks",
+    "by_status": {
+      "fail": 0,
+      "warn": 0,
+      "needs_review": 0,
+      "info": 0
+    },
+    "by_severity": {
+      "error": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    },
+    "rules": {
+      "pass": 10,
+      "fail": 0,
+      "warn": 0,
+      "needs_review": 0,
+      "info": 0,
+      "skip": 4,
+      "error": 0
+    },
+    "threshold_exceeded": false,
+    "hidden_below_severity": 0,
+    "suppressed": 0
+  },
+  "findings": [],
+  "rule_results": [
+    {
+      "rule_id": "google.account-deletion-web",
+      "rule_version": "0.1.0",
+      "title": "Web link for account deletion requests is declared",
+      "outcome": "skip",
+      "reason": "app.has_account_creation is false in .release-doctor.yml",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "google.sensitive-permissions",
+      "rule_version": "0.1.0",
+      "title": "Sensitive Android permissions have a policy path",
+      "outcome": "pass",
+      "reason": "0 permission(s) in 1 manifest(s); library manifests merged at build time were not inspected",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "google.target-api-level",
+      "rule_version": "0.1.0",
+      "title": "targetSdk meets Google Play's current requirement",
+      "outcome": "pass",
+      "reason": "targetSdk meets API 36 (phone-tablet, effective 2026-08-31, snapshot 2026.10.14)",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "apple.permission-purpose-string",
+      "rule_version": "0.1.0",
+      "title": "Permission purpose strings are present and specific",
+      "outcome": "pass",
+      "reason": "1 purpose string(s) checked in 1 Info.plist file(s)",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "apple.required-reason-api",
+      "rule_version": "0.1.0",
+      "title": "Required reason APIs are declared in the privacy manifest",
+      "outcome": "skip",
+      "reason": "not implemented for expo",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "shared.account-deletion-in-app",
+      "rule_version": "0.1.0",
+      "title": "Apps with account creation offer in-app account deletion",
+      "outcome": "skip",
+      "reason": "app.has_account_creation is false in .release-doctor.yml",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "shared.app-identifier",
+      "rule_version": "0.1.0",
+      "title": "Application ID and bundle identifier are not template values",
+      "outcome": "pass",
+      "reason": "app.recipebox, app.recipebox",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "shared.debug-configuration",
+      "rule_version": "0.1.0",
+      "title": "Release builds do not use debug configuration",
+      "outcome": "pass",
+      "reason": "1 build/configuration file(s) checked",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "shared.embedded-secrets",
+      "rule_version": "0.1.0",
+      "title": "No credentials embedded in the project",
+      "outcome": "pass",
+      "reason": "3 text file(s) scanned (git status unavailable)",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "shared.permission-usage-evidence",
+      "rule_version": "0.1.0",
+      "title": "Declared permissions have a matching feature",
+      "outcome": "pass",
+      "reason": "1 declared capability group(s) matched to dependencies or code",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "shared.placeholder-content",
+      "rule_version": "0.1.0",
+      "title": "No template or placeholder content",
+      "outcome": "pass",
+      "reason": "1 source file(s) and 0 string/asset file(s) scanned",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "shared.privacy-policy",
+      "rule_version": "0.1.0",
+      "title": "Privacy policy is available and covers detected SDKs",
+      "outcome": "pass",
+      "reason": "1 policy URL(s) and 0 policy document(s) found",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "shared.release-version",
+      "rule_version": "0.1.0",
+      "title": "Version name and build number are valid and consistent",
+      "outcome": "pass",
+      "reason": "1 version source(s) checked",
+      "finding_count": 0
+    },
+    {
+      "rule_id": "shared.review-access",
+      "rule_version": "0.1.0",
+      "title": "Reviewers can access account-based features",
+      "outcome": "skip",
+      "reason": "no login or account signals found",
+      "finding_count": 0
+    }
+  ],
+  "suppressed": [],
+  "diagnostics": [],
+  "disclaimer": "Automated checks cannot guarantee App Store or Google Play approval. Passing rules mean no issue was detected with the available evidence; items marked needs_review require a human decision."
+}

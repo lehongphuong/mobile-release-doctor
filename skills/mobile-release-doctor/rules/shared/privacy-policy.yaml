@@ -1,0 +1,30 @@
+id: shared.privacy-policy
+version: 0.1.0
+title: Privacy policy is available and covers detected SDKs
+description: >
+  Finds the privacy policy URL (config, fastlane metadata, app code) or a
+  policy document in the repository, flags placeholder URLs, and compares a
+  local policy document with data-collecting SDKs found in dependencies.
+platforms: [ios, android]
+frameworks: [flutter, react-native, expo, native-ios, native-android]
+category: privacy
+severity: medium
+max_severity: high
+allowed_statuses: [warn, needs_review]
+requirement_status: verified
+verification:
+  level: developer-declared
+  last_verified: 2026-10-14
+policy_references:
+  - apple.guideline-5-1-1-data-collection
+  - apple.app-privacy-details
+  - google.user-data-policy
+  - google.data-safety
+recommendation: >
+  Link a public privacy policy in both store listings and inside the app,
+  and make sure it describes the data each SDK collects.
+limitations:
+  - Store consoles are not visible; a policy entered only there produces needs_review.
+  - The SDK comparison checks for vendor names or purposes in the text, not legal adequacy.
+  - The scanner does not assume an SDK collects every data type it can collect.
+introduced_in: 0.1.0

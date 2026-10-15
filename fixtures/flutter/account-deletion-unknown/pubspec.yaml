@@ -1,0 +1,12 @@
+name: tide_timer
+description: Fixture where the scanner lacks the facts to decide.
+publish_to: "none"
+version: 2.0.1+40
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.2

@@ -1,0 +1,28 @@
+id: shared.review-access
+version: 0.1.0
+title: Reviewers can access account-based features
+description: >
+  When the app appears to have accounts or the developer declares that
+  login is needed, checks that a working demo account for App Review and
+  Play Console App access has been confirmed in .release-doctor.yml.
+platforms: [ios, android]
+frameworks: [flutter, react-native, expo, native-ios, native-android]
+category: store-metadata
+severity: high
+max_severity: high
+allowed_statuses: [warn, needs_review]
+requirement_status: verified
+verification:
+  level: developer-declared
+  last_verified: 2026-10-14
+applies_when:
+  - login_required_or_accounts_detected
+policy_references:
+  - apple.guideline-2-1-app-completeness
+recommendation: >
+  Provide reviewers with a non-expiring demo account (or a full demo mode)
+  in App Store Connect and Play Console App access, and test it first.
+limitations:
+  - Store consoles are not visible; the rule relies on the developer's declaration.
+  - Credentials are never read from or written to the config file.
+introduced_in: 0.1.0

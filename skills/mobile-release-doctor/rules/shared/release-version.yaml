@@ -1,0 +1,27 @@
+id: shared.release-version
+version: 0.1.0
+title: Version name and build number are valid and consistent
+description: >
+  Validates the app version (pubspec.yaml, Gradle, Info.plist, Xcode build
+  settings, Expo app.json) against store format rules and flags hard-coded
+  values that override the Flutter source of truth.
+platforms: [ios, android]
+frameworks: [flutter, react-native, expo, native-ios, native-android]
+category: build-configuration
+severity: medium
+max_severity: error
+allowed_statuses: [fail, warn]
+requirement_status: verified
+verification:
+  level: config-parse
+  last_verified: 2026-10-14
+policy_references:
+  - apple.cfbundleshortversionstring
+  - google.versioning
+recommendation: >
+  Keep one source of truth for the version and increase the build number
+  for every upload.
+limitations:
+  - Values injected by CI (fastlane, --build-number flags) are not visible.
+  - Does not know the last uploaded build number, so it cannot check that the number increased.
+introduced_in: 0.1.0

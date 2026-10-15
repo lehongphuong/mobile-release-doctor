@@ -1,0 +1,30 @@
+id: apple.required-reason-api
+version: 0.1.0
+title: Required reason APIs are declared in the privacy manifest
+description: >
+  Finds required reason APIs (UserDefaults, file timestamps, system boot
+  time, disk space, active keyboards) in app-owned Swift/Objective-C code,
+  then checks PrivacyInfo.xcprivacy declares each category with an approved
+  reason code and is part of the Xcode project.
+platforms: [ios]
+frameworks: [flutter, react-native, native-ios]
+category: privacy
+severity: high
+max_severity: high
+allowed_statuses: [fail, warn]
+requirement_status: verified
+verification:
+  level: config-parse
+  last_verified: 2026-10-14
+policy_references:
+  - apple.required-reason-api
+  - apple.privacy-manifest
+recommendation: >
+  Add PrivacyInfo.xcprivacy to the app target and declare every required
+  reason API category your own code uses, with the approved reason that
+  matches the use.
+limitations:
+  - API usage is detected by symbol names in source code, so wrappers, macros or generated code can be missed or over-matched.
+  - Third-party SDKs are responsible for their own privacy manifests; they are not checked by this rule.
+  - Approved reason codes come from Apple's documentation as fetched on 2026-10-14.
+introduced_in: 0.1.0

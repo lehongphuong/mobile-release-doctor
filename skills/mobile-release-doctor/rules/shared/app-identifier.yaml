@@ -1,0 +1,25 @@
+id: shared.app-identifier
+version: 0.1.0
+title: Application ID and bundle identifier are not template values
+description: >
+  Validates the Android application ID and iOS bundle identifier format and
+  flags the com.example prefix left by project templates.
+platforms: [ios, android]
+frameworks: [flutter, react-native, expo, native-ios, native-android]
+category: build-configuration
+severity: high
+max_severity: error
+allowed_statuses: [fail, warn]
+requirement_status: verified
+verification:
+  level: config-parse
+  last_verified: 2026-10-14
+policy_references:
+  - google.application-id
+  - apple.app-review-guidelines
+recommendation: >
+  Use a reverse-domain identifier you own; it cannot be changed after the
+  first release.
+limitations:
+  - Identifiers set through build flavors or xcconfig files are not resolved.
+introduced_in: 0.1.0

@@ -1,0 +1,27 @@
+id: shared.placeholder-content
+version: 0.1.0
+title: No template or placeholder content
+description: >
+  Looks for framework starter templates, lorem ipsum, "Coming soon" labels
+  and template launcher labels that suggest an incomplete app.
+platforms: [ios, android]
+frameworks: [flutter, react-native, expo, native-ios, native-android]
+category: app-completeness
+severity: medium
+max_severity: high
+allowed_statuses: [warn, needs_review]
+requirement_status: needs-research
+verification:
+  level: source-heuristic
+  last_verified: 2026-10-14
+policy_references:
+  - apple.guideline-2-1-app-completeness
+  - apple.guideline-4-2-minimum-functionality
+  - google.minimum-functionality
+recommendation: >
+  Replace placeholder content and hide unfinished features in release
+  builds.
+limitations:
+  - A match does not mean the text is reachable in the release build.
+  - Screens, images and runtime behavior are not inspected.
+introduced_in: 0.1.0

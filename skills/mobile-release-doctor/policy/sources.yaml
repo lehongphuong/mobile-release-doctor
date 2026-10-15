@@ -1,0 +1,159 @@
+# Official policy sources referenced by rules.
+# last_checked: the date the page was fetched and the cited requirement re-read.
+# null means the URL has not been fetched by a maintainer yet; run
+# `node skills/mobile-release-doctor/scripts/validate-policy-sources.mjs` with network access.
+snapshot_version: "2026.10.14"
+sources:
+  # --- Apple -------------------------------------------------------------
+  - id: apple.app-review-guidelines
+    authority: apple
+    title: App Review Guidelines
+    url: https://developer.apple.com/app-store/review/guidelines/
+    last_checked: 2026-10-14
+  - id: apple.guideline-2-1-app-completeness
+    authority: apple
+    title: App Review Guidelines 2.1 – App Completeness
+    url: https://developer.apple.com/app-store/review/guidelines/#app-completeness
+    last_checked: 2026-10-14
+  - id: apple.guideline-4-2-minimum-functionality
+    authority: apple
+    title: App Review Guidelines 4.2 – Minimum Functionality
+    url: https://developer.apple.com/app-store/review/guidelines/#minimum-functionality
+    last_checked: 2026-10-14
+  - id: apple.guideline-5-1-1-data-collection
+    authority: apple
+    title: App Review Guidelines 5.1.1 – Data Collection and Storage
+    url: https://developer.apple.com/app-store/review/guidelines/#data-collection-and-storage
+    last_checked: 2026-10-14
+  - id: apple.account-deletion
+    authority: apple
+    title: Offering account deletion in your app
+    url: https://developer.apple.com/support/offering-account-deletion-in-your-app/
+    last_checked: 2026-10-14
+  - id: apple.info-plist
+    authority: apple
+    title: Information Property List (purpose strings / usage descriptions)
+    url: https://developer.apple.com/documentation/bundleresources/information-property-list
+    last_checked: 2026-10-14
+  - id: apple.privacy-manifest
+    authority: apple
+    title: Privacy manifest files
+    url: https://developer.apple.com/documentation/bundleresources/privacy-manifest-files
+    last_checked: 2026-10-14
+  - id: apple.required-reason-api
+    authority: apple
+    title: Describing use of required reason API
+    url: https://developer.apple.com/documentation/bundleresources/describing-use-of-required-reason-api
+    last_checked: 2026-10-14
+  - id: apple.cfbundleshortversionstring
+    authority: apple
+    title: CFBundleShortVersionString
+    url: https://developer.apple.com/documentation/bundleresources/information-property-list/cfbundleshortversionstring
+    last_checked: 2026-10-14
+  - id: apple.app-transport-security
+    authority: apple
+    title: NSAppTransportSecurity
+    url: https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity
+    last_checked: 2026-10-14
+  - id: apple.app-privacy-details
+    authority: apple
+    title: App privacy details on the App Store
+    url: https://developer.apple.com/app-store/app-privacy-details/
+    last_checked: 2026-10-14
+
+  # --- Google ------------------------------------------------------------
+  - id: google.target-api-requirements
+    authority: google
+    title: Meet Google Play's target API level requirement
+    url: https://developer.android.com/google/play/requirements/target-sdk
+    last_checked: 2026-10-14
+  - id: google.target-api-policy
+    authority: google
+    title: Target API level requirements for Google Play apps (Play Console Help)
+    url: https://support.google.com/googleplay/android-developer/answer/11926878
+    last_checked: null
+  - id: google.developer-program-policy
+    authority: google
+    title: Google Play Developer Program Policy
+    url: https://play.google/developer-content-policy/
+    last_checked: null
+  - id: google.user-data-policy
+    authority: google
+    title: User Data policy (privacy policy requirements)
+    url: https://support.google.com/googleplay/android-developer/answer/10144311
+    last_checked: null
+  - id: google.data-safety
+    authority: google
+    title: Provide information for Google Play's Data safety section
+    url: https://support.google.com/googleplay/android-developer/answer/10787469
+    last_checked: null
+  - id: google.account-deletion
+    authority: google
+    title: Understanding Google Play's app account deletion requirements
+    url: https://support.google.com/googleplay/android-developer/answer/13327111
+    last_checked: null
+  - id: google.sensitive-permissions
+    authority: google
+    title: Permissions and APIs that Access Sensitive Information
+    url: https://support.google.com/googleplay/android-developer/answer/9888170
+    last_checked: null
+  - id: google.background-location
+    authority: google
+    title: Requesting access to location in the background
+    url: https://support.google.com/googleplay/android-developer/answer/9799150
+    last_checked: null
+  - id: google.photo-video-permissions
+    authority: google
+    title: Google Play's Photo and Video Permissions policy
+    url: https://support.google.com/googleplay/android-developer/answer/14115180
+    last_checked: null
+  - id: google.foreground-service
+    authority: google
+    title: Understanding foreground service and full-screen intent requirements
+    url: https://support.google.com/googleplay/android-developer/answer/13392821
+    last_checked: null
+  - id: google.sms-call-log
+    authority: google
+    title: Use of SMS or Call Log permission groups
+    url: https://support.google.com/googleplay/android-developer/answer/10208820
+    last_checked: null
+  - id: google.all-files-access
+    authority: google
+    title: Use of All files access (MANAGE_EXTERNAL_STORAGE) permission
+    url: https://support.google.com/googleplay/android-developer/answer/10467955
+    last_checked: null
+  - id: google.package-visibility
+    authority: google
+    title: Use of the broad package (app) visibility (QUERY_ALL_PACKAGES) permission
+    url: https://support.google.com/googleplay/android-developer/answer/10158779
+    last_checked: null
+  - id: google.app-signing
+    authority: google
+    title: Sign your app
+    url: https://developer.android.com/studio/publish/app-signing
+    last_checked: 2026-10-14
+  - id: google.application-id
+    authority: google
+    title: Configure the app module (application ID)
+    url: https://developer.android.com/build/configure-app-module
+    last_checked: 2026-10-14
+  - id: google.versioning
+    authority: google
+    title: Version your app
+    url: https://developer.android.com/studio/publish/versioning
+    last_checked: 2026-10-14
+  - id: google.android-debuggable
+    authority: google
+    title: "Security risk: android:debuggable"
+    url: https://developer.android.com/privacy-and-security/risks/android-debuggable
+    last_checked: 2026-10-14
+  - id: google.cleartext-traffic
+    authority: google
+    title: "Security risk: cleartext communications"
+    url: https://developer.android.com/privacy-and-security/risks/cleartext-communications
+    last_checked: 2026-10-14
+  - id: google.minimum-functionality
+    authority: google
+    title: Spam and Minimum Functionality policy
+    url: https://support.google.com/googleplay/android-developer/answer/9898783
+    last_checked: null

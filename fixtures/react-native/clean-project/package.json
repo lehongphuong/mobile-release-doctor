@@ -1,0 +1,10 @@
+{
+  "name": "parkspot",
+  "version": "3.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "18.3.1",
+    "react-native": "0.76.5",
+    "react-native-geolocation-service": "5.3.1"
+  }
+}

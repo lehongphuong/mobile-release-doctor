@@ -1,0 +1,29 @@
+id: google.account-deletion-web
+version: 0.1.0
+title: Web link for account deletion requests is declared
+description: >
+  For apps that appear to support account creation, checks that a public
+  web URL for account deletion requests is declared in .release-doctor.yml,
+  as Google Play requires one in the Data safety form.
+platforms: [android]
+frameworks: [flutter, react-native, expo, native-android]
+category: account-lifecycle
+severity: high
+max_severity: high
+allowed_statuses: [warn]
+requirement_status: verified
+verification:
+  level: developer-declared
+  last_verified: 2026-10-14
+applies_when:
+  - account_creation_detected_or_declared
+policy_references:
+  - google.account-deletion
+  - google.data-safety
+recommendation: >
+  Publish a page where users can request deletion of their account and
+  data without the app installed, and enter it in the Data safety form.
+limitations:
+  - The scanner cannot read Play Console; it relies on app.account_deletion.web_url.
+  - URLs are not fetched because scans run offline.
+introduced_in: 0.1.0
