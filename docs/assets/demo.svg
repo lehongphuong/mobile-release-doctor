@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="758" viewBox="0 0 1000 758" role="img" aria-label="Mobile Release Doctor scanning a sample Flutter project">
+  <title>Mobile Release Doctor — sample scan of fixtures/flutter/risky-project</title>
+  <rect width="1000" height="758" rx="12" fill="#0d1117"/>
+  <path d="M0 12a12 12 0 0 1 12-12h976a12 12 0 0 1 12 12v24H0z" fill="#161b22"/>
+  <circle cx="22" cy="18" r="6" fill="#ff5f57"/><circle cx="42" cy="18" r="6" fill="#febc2e"/><circle cx="62" cy="18" r="6" fill="#28c840"/>
+  <text x="500" y="23" text-anchor="middle" fill="#8b949e" font-family="ui-sans-serif, -apple-system, Segoe UI, sans-serif" font-size="13">health_tracker — claude</text>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14">
+  <text x="24" y="76" xml:space="preserve"><tspan fill="#7ee787" font-weight="700">$ </tspan><tspan fill="#e6edf3" font-weight="700">/mobile-release-doctor scan</tspan></text>
+  
+  <text x="24" y="120" xml:space="preserve"><tspan fill="#e6edf3" font-weight="700">Mobile Release Doctor</tspan><tspan fill="#8b949e"> v0.1.0 · offline · no AI</tspan></text>
+  <text x="24" y="142" xml:space="preserve"><tspan fill="#8b949e">PROJECT  </tspan><tspan fill="#e6edf3">health_tracker · flutter · ios, android</tspan></text>
+  <text x="24" y="164" xml:space="preserve"><tspan fill="#8b949e">RESULT   </tspan><tspan fill="#ff7b72" font-weight="700">5 fail</tspan><tspan fill="#8b949e"> · </tspan><tspan fill="#e3b341" font-weight="700">19 warn</tspan><tspan fill="#8b949e"> · </tspan><tspan fill="#79c0ff" font-weight="700">5 need verification</tspan></text>
+  
+  <text x="24" y="208" xml:space="preserve"><tspan fill="#ff7b72" font-weight="700">FAIL   </tspan><tspan fill="#e6edf3" font-weight="700">targetSdk 34 is below Google Play's requirement (API 36)</tspan><tspan fill="#8b949e">  google.target-api-level</tspan></text>
+  <text x="24" y="230" xml:space="preserve"><tspan fill="#8b949e">       ↳ </tspan><tspan fill="#d2a8ff">android/app/build.gradle:14</tspan><tspan fill="#8b949e">  Target SDK</tspan></text>
+  <text x="24" y="252" xml:space="preserve"><tspan fill="#7ee787">       Fix: </tspan><tspan fill="#e6edf3">Raise targetSdk to 36 or higher, review the Android behavior changes for each version you s…</tspan></text>
+  
+  <text x="24" y="296" xml:space="preserve"><tspan fill="#ff7b72" font-weight="700">FAIL   </tspan><tspan fill="#e6edf3" font-weight="700">Release build is signed with the debug key</tspan><tspan fill="#8b949e">  shared.debug-configuration</tspan></text>
+  <text x="24" y="318" xml:space="preserve"><tspan fill="#8b949e">       ↳ </tspan><tspan fill="#d2a8ff">android/app/build.gradle:23</tspan><tspan fill="#8b949e">  Release signing config</tspan></text>
+  <text x="24" y="340" xml:space="preserve"><tspan fill="#7ee787">       Fix: </tspan><tspan fill="#e6edf3">Create an upload keystore, reference it from a release signingConfig loaded from key.proper…</tspan></text>
+  
+  <text x="24" y="384" xml:space="preserve"><tspan fill="#ff7b72" font-weight="700">FAIL   </tspan><tspan fill="#e6edf3" font-weight="700">Empty purpose string: NSCameraUsageDescription</tspan><tspan fill="#8b949e">  apple.permission-purpose-string</tspan></text>
+  <text x="24" y="406" xml:space="preserve"><tspan fill="#8b949e">       ↳ </tspan><tspan fill="#d2a8ff">ios/Runner/Info.plist:13</tspan><tspan fill="#8b949e">  Purpose string is empty</tspan></text>
+  <text x="24" y="428" xml:space="preserve"><tspan fill="#7ee787">       Fix: </tspan><tspan fill="#e6edf3">Write a specific sentence describing what the app does with this access, e.g.</tspan></text>
+  
+  <text x="24" y="472" xml:space="preserve"><tspan fill="#e3b341" font-weight="700">WARN   </tspan><tspan fill="#e6edf3" font-weight="700">Required reason APIs used without an app privacy manifest</tspan><tspan fill="#8b949e">  apple.required-reason-api</tspan></text>
+  <text x="24" y="494" xml:space="preserve"><tspan fill="#8b949e">       ↳ </tspan><tspan fill="#d2a8ff">ios/Runner/AppDelegate.swift:10</tspan><tspan fill="#8b949e">  User defaults API (NSPrivacyAccessedAPICategoryUs…</tspan></text>
+  <text x="24" y="516" xml:space="preserve"><tspan fill="#7ee787">       Fix: </tspan><tspan fill="#e6edf3">Add PrivacyInfo.xcprivacy to the app target (Xcode: File &gt; New &gt; File &gt; App Privacy) and de…</tspan></text>
+  
+  <text x="24" y="560" xml:space="preserve"><tspan fill="#e3b341" font-weight="700">WARN   </tspan><tspan fill="#e6edf3" font-weight="700">App appears to create accounts but no in-app deletion flow was found</tspan><tspan fill="#8b949e">  shared.account-deletion-in-app</tspan></text>
+  <text x="24" y="582" xml:space="preserve"><tspan fill="#8b949e">       ↳ </tspan><tspan fill="#d2a8ff">pubspec.yaml</tspan><tspan fill="#8b949e">  Direct dependency firebase_auth</tspan></text>
+  <text x="24" y="604" xml:space="preserve"><tspan fill="#7ee787">       Fix: </tspan><tspan fill="#e6edf3">Add a clearly labelled “Delete account” action (e.g.</tspan></text>
+  
+  <text x="24" y="648" xml:space="preserve"><tspan fill="#79c0ff" font-weight="700">VERIFY </tspan><tspan fill="#e6edf3" font-weight="700">Photo library permission may be unnecessary</tspan><tspan fill="#8b949e">  shared.permission-usage-evidence</tspan></text>
+  <text x="24" y="670" xml:space="preserve"><tspan fill="#8b949e">       ↳ </tspan><tspan fill="#d2a8ff">android/app/src/main/AndroidManifest.xml:5</tspan><tspan fill="#8b949e">  Declared Android permission</tspan></text>
+  <text x="24" y="692" xml:space="preserve"><tspan fill="#7ee787">       Fix: </tspan><tspan fill="#e6edf3">Confirm which feature or dependency uses photo library.</tspan></text>
+  
+  <text x="24" y="736" xml:space="preserve"><tspan fill="#8b949e">… </tspan><tspan fill="#8b949e">23 more findings, each with evidence, a fix and an official source</tspan></text>
+  </g>
+</svg>

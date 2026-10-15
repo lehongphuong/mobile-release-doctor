@@ -15,7 +15,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "scan": "node skills/mobile-release-doctor/scripts/scan.mjs",
-    "validate-rules": "node skills/mobile-release-doctor/scripts/scan.mjs --validate-rules"
+    "validate-rules": "node skills/mobile-release-doctor/scripts/scan.mjs --validate-rules",
+    "demo": "node scripts/render-demo-svg.mjs"
   },
   "dependencies": {
     "fast-xml-parser": "4.5.7",
